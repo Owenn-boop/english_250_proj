@@ -1,0 +1,210 @@
+[gd_scene load_steps=12 format=3 uid="uid://c86km6m0havte"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_v08rq"]
+[ext_resource type="Script" path="res://ore_node.gd" id="2_6c3sk"]
+[ext_resource type="Texture2D" uid="uid://do18rqvoo106y" path="res://Rock2_1.png" id="2_rpjp1"]
+[ext_resource type="Script" path="res://lumber_node.gd" id="3_n603v"]
+[ext_resource type="Script" path="res://health_bar.gd" id="4_vupdd"]
+[ext_resource type="Script" path="res://sell_button.gd" id="5_ueuvu"]
+[ext_resource type="Texture2D" uid="uid://bwi5gm8ft6fqx" path="res://Broken_tree7.png" id="7_1u6hn"]
+[ext_resource type="Texture2D" uid="uid://cfugne226472l" path="res://Rock2_3.png" id="8_0nmeu"]
+[ext_resource type="Script" path="res://price_update_bar.gd" id="9_y5ftn"]
+[ext_resource type="Script" path="res://button.gd" id="10_xd44h"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1cbjl"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_v08rq")
+
+[node name="LumberNode" type="Sprite2D" parent="."]
+position = Vector2(600, 100)
+texture = ExtResource("2_rpjp1")
+script = ExtResource("3_n603v")
+priceMulti = 2.0
+maxHealth = 20.0
+health = 20
+
+[node name="ProgressBar" type="ProgressBar" parent="LumberNode"]
+material = SubResource("CanvasItemMaterial_1cbjl")
+offset_left = -32.0
+offset_top = -33.0
+offset_right = 32.0
+offset_bottom = -26.0
+show_percentage = false
+script = ExtResource("4_vupdd")
+metadata/_edit_use_anchors_ = true
+
+[node name="OreNode" type="Sprite2D" parent="."]
+position = Vector2(300, 100)
+texture = ExtResource("2_rpjp1")
+script = ExtResource("2_6c3sk")
+respawnDelay = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="OreNode"]
+material = SubResource("CanvasItemMaterial_1cbjl")
+offset_left = -32.0
+offset_top = -33.0
+offset_right = 32.0
+offset_bottom = -26.0
+show_percentage = false
+script = ExtResource("4_vupdd")
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreBoard" type="HSplitContainer" parent="."]
+custom_minimum_size = Vector2(0, 50)
+offset_left = 944.0
+offset_top = 17.0
+offset_right = 1085.0
+offset_bottom = 645.0
+split_offset = 100
+dragger_visibility = 2
+
+[node name="Names" type="VBoxContainer" parent="ScoreBoard"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Ore" type="RichTextLabel" parent="ScoreBoard/Names"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Ore:"
+text_direction = 1
+
+[node name="Lumber" type="RichTextLabel" parent="ScoreBoard/Names"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Lumber:"
+text_direction = 1
+
+[node name="Amounts" type="VBoxContainer" parent="ScoreBoard"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Ore" type="RichTextLabel" parent="ScoreBoard/Amounts"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "0"
+text_direction = 2
+
+[node name="Lumber" type="RichTextLabel" parent="ScoreBoard/Amounts"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "0"
+text_direction = 2
+
+[node name="SellButtons" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(50, 50)
+offset_left = 1090.0
+offset_top = 17.0
+offset_right = 1150.0
+offset_bottom = 645.0
+
+[node name="OreSell" type="Button" parent="SellButtons"]
+layout_mode = 2
+text = "Sell"
+script = ExtResource("5_ueuvu")
+resourceName = "Ore"
+
+[node name="Lumber" type="Button" parent="SellButtons"]
+layout_mode = 2
+text = "Sell"
+script = ExtResource("5_ueuvu")
+resourceName = "Lumber"
+
+[node name="MoneyLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(0, 30)
+offset_right = 65.0
+offset_bottom = 30.0
+text = "Money:"
+text_direction = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Money" type="RichTextLabel" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(0, 30)
+offset_left = 65.0
+offset_right = 125.0
+offset_bottom = 30.0
+text = "0"
+text_direction = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CurrentPricesText" type="RichTextLabel" parent="."]
+offset_left = 46.0
+offset_top = 521.0
+offset_right = 253.0
+offset_bottom = 648.0
+text = "Current Price of Ore:
+Current Price of Lumber:"
+
+[node name="Prices" type="RichTextLabel" parent="."]
+offset_left = 254.0
+offset_top = 521.0
+offset_right = 830.0
+offset_bottom = 648.0
+text = "$1
+$2"
+
+[node name="Tree Icon" type="Sprite2D" parent="."]
+position = Vector2(1047, 66)
+scale = Vector2(0.429688, 0.429688)
+texture = ExtResource("7_1u6hn")
+
+[node name="Rock Icon" type="Sprite2D" parent="."]
+position = Vector2(1046, 33)
+texture = ExtResource("8_0nmeu")
+
+[node name="Tree Icon2" type="Sprite2D" parent="."]
+position = Vector2(24.7499, 555.75)
+scale = Vector2(0.386718, 0.386718)
+texture = ExtResource("7_1u6hn")
+
+[node name="Rock Icon2" type="Sprite2D" parent="."]
+position = Vector2(23.5, 532.5)
+scale = Vector2(0.84375, 0.84375)
+texture = ExtResource("8_0nmeu")
+
+[node name="PriceUpdateBar" type="ProgressBar" parent="."]
+offset_left = 15.0
+offset_top = 613.0
+offset_right = 271.0
+offset_bottom = 640.0
+script = ExtResource("9_y5ftn")
+
+[node name="PricesText" type="RichTextLabel" parent="."]
+offset_left = 17.0
+offset_top = 485.0
+offset_right = 268.0
+offset_bottom = 525.0
+text = "Current Prices:"
+
+[node name="PriceUpdateText" type="RichTextLabel" parent="."]
+offset_left = 17.0
+offset_top = 581.0
+offset_right = 268.0
+offset_bottom = 621.0
+text = "Progress to Next Price Update:"
+
+[node name="Tip" type="RichTextLabel" parent="."]
+offset_left = 661.0
+offset_top = 485.0
+offset_right = 1152.0
+offset_bottom = 648.0
+text = "Tip:
+
+It is easier to gather ore, but lumber (generally) sells for more!
+You should keep this in mind when trying to gather the more profitable material to make better use of your time.
+
+You can also hold down the mouse instead of clicking."
+
+[node name="UpgradeDamageButton" type="Button" parent="."]
+offset_left = 959.0
+offset_top = 215.0
+offset_right = 1126.0
+offset_bottom = 272.0
+text = "Upgrade Damage 50"
+script = ExtResource("10_xd44h")
